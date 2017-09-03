@@ -1,0 +1,83 @@
+<!-- <script>
+        if(true){
+            var x = 3;
+        }
+        alert(x);
+        </script> -->
+<!-- test1- -->
+<!-- <script>
+if(true){
+    let x = 3;
+}
+alert(x);
+</script> -->
+
+<!-- TEST2 -->
+<!-- <script>
+    const x = 3;
+    x=5;
+
+</script> -->
+<!--test3  -->
+<!-- <script>
+        const x = 3;
+        alert(x);
+        const y;
+    
+    </script> -->
+
+<!-- test4 函式-->
+
+<!-- <script>
+    // 傳統:
+    function t1(){
+        alert("Hello1")
+    };
+
+    let t2 = function(){     // 右邊是匿名函式
+        alert("Hello2")
+    };
+
+    // 箭頭函式:
+    let t3=()=>{    // 如此即沒有參數
+        alert("Hello3")
+
+    };
+
+
+     // 箭頭函式:
+     let t4=(n1, n2)=>{    // 如此即沒有參數
+        // alert(n1*n2)
+        return n1*n2
+    };
+    let result = t4(3, 4);
+
+
+
+    let t5=(n1, n2)=>(n1*n2)
+    let result2 = t5(3,4);
+    alert(result2)
+  
+</script> -->
+
+
+
+<!-- TEST5 參數的預設值-->
+<script>
+    let t5=(n1, n2=2)=>(n1*n2)
+    let result2 = t5(3);
+    // alert(result2)    //噴6
+
+
+
+    let t2 = function(mes="Hello"){     // 右邊是匿名函式
+        alert(mes)
+    };
+
+    t2();   //噴"Hello"
+    t2("XD");
+
+
+
+  
+</script>
