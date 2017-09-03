@@ -1,5 +1,5 @@
 // 載入express模組
-const express = require('express')
+const express = require('express')       // 這require寫法是node獨有，純javascript在前端的寫法沒有喔!
 // 建立express中的Application物件
 const app = express()
 
