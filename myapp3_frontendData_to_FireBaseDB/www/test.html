@@ -1,0 +1,15 @@
+<script>
+    function saveData() {
+        // 用AJAX連線到後端
+        let req = new XMLHttpRequest();
+        req.open("post", "/save");    // 如果是get 就直接將參數寫在右邊
+        //  指定要傳送格式為"application/x-www-form-urlencoded" 
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
+        req.onload = function() {
+            alert(this.responseText);
+        };
+        req.send("data=ply");     // post將參數寫在這裡!
+    }
+</script>
+
+<button onclick="saveData();">Click Me!</button>
