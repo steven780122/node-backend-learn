@@ -25,7 +25,7 @@ app.post('/save', function (req, res) {
     let ref = database.ref("/messages");  //取得參考路徑    放在message裡面
 
     // 儲存資料!
-    ref.set(req.body.data, function(error){    //有一個call back確認是否成功!!!
+    ref.set(req.body.data, function(error){    //儲存資料使用Set，有舊資料會被取代，有一個call back確認是否成功!!!
         if(error){
             res.send("Failed!!")
         }
