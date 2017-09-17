@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Comments</title>
+<script>
+function ajax(method, src, args, callback){       // 方法，網址，參數，處理完畢會callback回去
+	let req=new XMLHttpRequest();
+	if(method.toLowerCase()=="post"){
+		req.open(method, src);
+		req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		req.onload=callback;
+		req.send(args);
+	}else{
+		req.open(method, src+"?"+args);
+		req.onload=callback;
+		req.send();
+	}
+}
+
+function post(){
+	var name = document.getElementById("name").value;   // 單行輸入框
+	var content = document.getElementById("content").value;    // 多行輸入框，會有換行符號，但網頁不會換所以要做以下處理:
+
+	content = content.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>")    // 一般replace(”\r\n”, YYYY)  >>   只會換到第一個
+																			// 所以要用/XXXXX/g   g:是global是指可以對到每一個!!
+
+	console.log(content)
+
+	var args = "name=" + encodeURIComponent(name) + "&content=" + encodeURIComponent(content);// encodeURIComponent 讓有中文不會有問題，處理中文用!
+	ajax("post", "/post", args, function(){
+		// alert("OK!")
+		get();
+	});
+};
+
+function get(){
+	ajax("get", "/get", "", function(){     // server打回來後
+		// alert(this.responseText);     //這是一串字串所以可以用工具: JSON.parse
+		var data = JSON.parse(this.responseText);
+		console.log(data)   // 可以在browser的console看到撈回所有留言DB
+
+		var board = document.getElementById("board");
+		board.innerHTML = "";
+		var post;
+
+		for(var key in data){
+			post = data[key];
+			board.innerHTML = "<div>" + post.name.bold() + "<br/>" + post.content + "</div><hr/>" + board.innerHTML   // bold:粗體
+		}
+	});
+
+};
+
+window.onload = function(){    //網頁一載入│，立刻讀取一次
+	get();
+	// window.setInterval(get, 5000);     //為了讓5秒後可以再重新get
+
+}
+
+</script>
+</head>
+<body>
+	<h3>Comments</h3>
+	<div>
+		Name: <input type="text" id="name" /><br/>
+		Content: <textarea id="content"></textarea>
+		<button onclick="post();">Post</button>
+	</div>
+	<hr/>
+	<div id="board"></div>
+</body>
+</html>
